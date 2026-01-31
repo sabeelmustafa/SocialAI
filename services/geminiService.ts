@@ -86,15 +86,24 @@ export const consultMarketingExpert = async (
   const ai = getAiClient();
   const model = "gemini-3-pro-preview";
   
-  let systemInstruction = "You are a world-class Digital Marketing Consultant and Growth Hacker. Give specific, actionable advice.";
+  // Updated instruction to be concise and direct
+  let systemInstruction = `
+    You are a world-class Digital Marketing Consultant and Growth Hacker. 
+    CRITICAL INSTRUCTION: Provide extremely concise, high-impact advice. 
+    - Do NOT write blog posts or long introductions.
+    - Get straight to the point immediately.
+    - Use bullet points for lists.
+    - Keep responses under 100 words unless explicitly asked for a detailed strategy.
+    - Be professional, sharp, and direct.
+  `;
   
   if (campaign) {
     systemInstruction += `
-      You are currently advising on a specific campaign:
-      Company: ${campaign.companyName}
-      Niche: ${campaign.niche}
-      Audience: ${campaign.targetAudience}
-      Voice: ${campaign.brandVoice}
+      Context for this session:
+      - Company: ${campaign.companyName}
+      - Niche: ${campaign.niche}
+      - Target Audience: ${campaign.targetAudience}
+      - Brand Voice: ${campaign.brandVoice}
     `;
   }
 
